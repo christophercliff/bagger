@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html class="no-js">
+<head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <script type="text/javascript">(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+    
+    <title>Bagger</title>
+    
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset/reset-min.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset-fonts/reset-fonts.css">
+    <link rel="stylesheet" type="text/css" href="../bagger.css">
+    
+    <style type="text/css">
+        
+        body {
+            padding: 300px;
+        }
+        
+    </style>
+    
+</head>
+<body>
+    
+    <div class="mybagger"><div class="mode mode-active" id="mode-disabled">
+            <span>Add Item</span>
+            <span>(Select a size first)</span>
+        </div>
+        <div class="mode" id="mode-empty">
+            <a class="create-item" href="#" title="Add">Add Item</a>
+        </div>
+        <div class="mode" id="mode-populated">
+            <a class="mode-to-update" href="#" title="Update Item"><span class="value">1</span> Item in Your Cart</a>
+        </div>
+        <div class="mode" id="mode-update">
+            <ul class="option-set">
+                <li class="option option-selected" id="option-1">
+                    <a class="option-a update-item" href="#" title="1">1</a>
+                </li>
+                <li class="option" id="option-2">
+                    <a class="option-a update-item" href="#" title="2">2</a>
+                </li>
+                <li class="option" id="option-3">
+                    <a class="option-a update-item" href="#" title="3">3</a>
+                </li>
+                <li class="option" id="option-4">
+                    <a class="option-a update-item" href="#" title="4">4</a>
+                </li>
+                <li class="option" id="option-5">
+                    <a class="option-a update-item" href="#" title="5">5</a>
+                </li>
+                <li class="option" id="option-6">
+                    <a class="option-a update-item" href="#" title="6">6</a>
+                </li>
+                <li class="option" id="option-7">
+                    <a class="option-a update-item" href="#" title="7">7</a>
+                </li>
+                <li class="option" id="option-8">
+                    <a class="option-a update-item" href="#" title="8">8</a>
+                </li>
+            </ul>
+            <a class="remove-item" href="#" title="Remove Item">Remove Item</a>
+        </div></div>
+    
+    <script id="baggerTemplate" type="text/x-jquery-tmpl">    
+        
+        <div class="mode mode-active" id="mode-disabled">
+            <span>Add Item</span>
+            <span>(Select a size first)</span>
+        </div>
+        <div class="mode" id="mode-empty">
+            <a class="create-item" href="#" title="Add">Add Item</a>
+        </div>
+        <div class="mode" id="mode-populated">
+            <a class="mode-to-update" href="#" title="Update Item"><span class="value">1</span> Item in Your Cart</a>
+        </div>
+        <div class="mode" id="mode-update">
+            <ul class="option-set">
+                <li class="option option-selected" id="option-1">
+                    <a class="option-a update-item" href="#" title="1">1</a>
+                </li>
+                <li class="option" id="option-2">
+                    <a class="option-a update-item" href="#" title="2">2</a>
+                </li>
+                <li class="option" id="option-3">
+                    <a class="option-a update-item" href="#" title="3">3</a>
+                </li>
+                <li class="option" id="option-4">
+                    <a class="option-a update-item" href="#" title="4">4</a>
+                </li>
+                <li class="option" id="option-5">
+                    <a class="option-a update-item" href="#" title="5">5</a>
+                </li>
+                <li class="option" id="option-6">
+                    <a class="option-a update-item" href="#" title="6">6</a>
+                </li>
+                <li class="option" id="option-7">
+                    <a class="option-a update-item" href="#" title="7">7</a>
+                </li>
+                <li class="option" id="option-8">
+                    <a class="option-a update-item" href="#" title="8">8</a>
+                </li>
+            </ul>
+            <a class="remove-item" href="#" title="Remove Item">Remove Item</a>
+        </div>
+        
+    </script>
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://github.com/jquery/jquery-tmpl/raw/master/jquery.tmpl.js"></script>
+    <script type="text/javascript" src="../jquery.ui.bagger.js"></script>
+    
+    <script type="text/javascript">
+        
+        $('.mybagger')
+            .bagger({
+                itemCreated: function (e, o) {
+                    
+                    o.callback();
+                    
+                },
+                itemUpdated: function (e, o) {
+                    
+                    o.callback();
+                    
+                },
+                itemRemoved: function (e, o) {
+                    
+                    o.callback();
+                    
+                }
+            })
+            ;
+        
+    </script>
+    
+</body>
+</html>
