@@ -20,6 +20,11 @@
                 .addClass('mode-set')
                 ;
             
+            $('#baggerTemplate')
+                .tmpl()
+                .appendTo($el)
+                ;
+            
             self._events();
             
             if (!options.disabled)
