@@ -1,7 +1,7 @@
 ﻿Bagger
 ===========
 
-An "add to bag" JavaScript control.
+An "add to bag" JavaScript control using jQuery UI.
 
 
 Description
