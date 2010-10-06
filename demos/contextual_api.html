@@ -6,7 +6,7 @@
     
     <script type="text/javascript">(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
     
-    <title>Bagger - Basic</title>
+    <title>Bagger - Contextual - API</title>
     
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset/reset-min.css">
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset-fonts/reset-fonts.css">
@@ -74,28 +74,80 @@
     
     <script type="text/javascript">
         
-        $('.mybagger')
-            .bagger({
-                item: {
-                    id: 'myId'
+        // simulate the API
+        var myAPI = function () {
+            
+            return {
+                
+                createItem: function (item, quantity, callback) {
+                    
+                    setTimeout(function(){
+                        
+                        if ($.isFunction(callback))
+                        {
+                            callback();
+                        }
+                        
+                    }, 300);
+                    
                 },
-                itemCreated: function (e, o) {
+                
+                updateItem: function (item, quantity, callback) {
                     
-                    o.callback();
+                    setTimeout(function(){
+                        
+                        if ($.isFunction(callback))
+                        {
+                            callback();
+                        }
+                        
+                    }, 300);
                     
                 },
-                itemUpdated: function (e, o) {
+                
+                removeItem: function (item, callback) {
                     
-                    o.callback();
-                    
-                },
-                itemRemoved: function (e, o) {
-                    
-                    o.callback();
+                    setTimeout(function(){
+                        
+                        if ($.isFunction(callback))
+                        {
+                            callback();
+                        }
+                        
+                    }, 300);
                     
                 }
-            })
-            ;
+                
+            };
+            
+        }();
+        
+        $(function(){
+            
+            $('.mybagger')
+                .bagger({
+                    item: {
+                        id: 'myItem'
+                    },
+                    itemCreated: function (e, o) {
+                        
+                        myAPI.createItem(o.item, o.quantity, o.callback);
+                        
+                    },
+                    itemUpdated: function (e, o) {
+                        
+                        myAPI.updateItem(o.item, o.quantity, o.callback);
+                        
+                    },
+                    itemRemoved: function (e, o) {
+                        
+                        myAPI.removeItem(o.item, o.callback);
+                        
+                    }
+                })
+                ;
+            
+        });
         
     </script>
     

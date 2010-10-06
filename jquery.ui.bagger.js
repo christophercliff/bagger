@@ -4,7 +4,7 @@
         
         options: {
             disabled: false,
-            item: null,
+            item: {},
             quantity: 0
         },
         
@@ -27,6 +27,9 @@
             
             self._events();
             
+            options.quantity = parseInt($el.attr('data-quantity'));
+            options.item.id = $el.attr('data-id');
+            
             if (!options.disabled)
             {
                 self.enable();
@@ -37,18 +40,8 @@
                 self._updateMode('populated');
                 self._updateQuantity(options.quantity);
             }
-        },
-        
-        _init: function () {
             
-            
-            
-        },
-        
-        _destroy: function () {
-            
-            
-            
+            self._trigger('start', null, self);
         },
         
         _block: function () {
@@ -197,7 +190,7 @@
             
             options.disabled = false;
             
-            self._updateQuantity(0);
+            self._updateQuantity(options.quantity);
             
         },
         

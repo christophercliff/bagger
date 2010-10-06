@@ -1,7 +1,7 @@
 ﻿        
         .mode-set {
             position: relative;
-            width: 250px;
+            width: 250px; height: 32px;
         }
         .mode-set a {
             text-decoration: none;
@@ -98,7 +98,7 @@
                     -webkit-box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.10);
                 }
             #mode-update {
-                position: absolute; left: 0; top: 0;
+                position: absolute; left: 0; top: 0; z-index: 2;
                 width: 100%;
                 background: -moz-linear-gradient(center top, #3b3b3b, #2c2c2c) repeat scroll 0 0 transparent;
                 background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3b3b3b), to(#2c2c2c));

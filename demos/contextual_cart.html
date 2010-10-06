@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html class="no-js">
+<head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <script type="text/javascript">(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+    
+    <title>Bagger - Contextual - API</title>
+    
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset/reset-min.css">
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.1/build/reset-fonts/reset-fonts.css">
+    <link rel="stylesheet" type="text/css" href="../bagger.css">
+    
+    <style type="text/css">
+        
+        body {
+            padding: 300px;
+            color: #444;
+        }
+        table {
+            visibility: hidden;
+        }
+        td {
+            padding: 10px;
+        }
+        thead td,
+        tfoot td {
+            font-weight: bold;
+        }
+        tfoot td {
+            text-align: right;
+        }
+        
+    </style>
+    
+</head>
+<body>
+    
+    <table cellspacing="0">
+        <thead>
+            <tr>
+                <td colspan="2">My Cart</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Item A</td>
+                <td>
+                    <div class="mybagger" data-id="item_a" data-quantity="1"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Item B</td>
+                <td>
+                    <div class="mybagger" data-id="item_b" data-quantity="3"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Item C</td>
+                <td>
+                    <div class="mybagger" data-id="item_c" data-quantity="2"></div>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">Total: $<span class="total">6</span></td>
+            </tr>
+        </tfoot>
+    </table>
+    
+    <script id="baggerTemplate" type="text/x-jquery-tmpl">
+        <div class="mode mode-active" id="mode-disabled">
+            <span>Add Item</span>
+            <span>(Select a size first)</span>
+        </div>
+        <div class="mode" id="mode-empty">
+            <a class="create-item" href="#" title="Add">Add Item</a>
+        </div>
+        <div class="mode" id="mode-populated">
+            <a class="mode-to-update" href="#" title="Update Item"><span class="value">1</span> Item in Your Cart</a>
+        </div>
+        <div class="mode" id="mode-update">
+            <ul class="option-set">
+                <li class="option option-selected" id="option-1">
+                    <a class="option-a update-item" href="#" title="1">1</a>
+                </li>
+                <li class="option" id="option-2">
+                    <a class="option-a update-item" href="#" title="2">2</a>
+                </li>
+                <li class="option" id="option-3">
+                    <a class="option-a update-item" href="#" title="3">3</a>
+                </li>
+                <li class="option" id="option-4">
+                    <a class="option-a update-item" href="#" title="4">4</a>
+                </li>
+                <li class="option" id="option-5">
+                    <a class="option-a update-item" href="#" title="5">5</a>
+                </li>
+                <li class="option" id="option-6">
+                    <a class="option-a update-item" href="#" title="6">6</a>
+                </li>
+                <li class="option" id="option-7">
+                    <a class="option-a update-item" href="#" title="7">7</a>
+                </li>
+                <li class="option" id="option-8">
+                    <a class="option-a update-item" href="#" title="8">8</a>
+                </li>
+            </ul>
+            <a class="remove-item" href="#" title="Remove Item">Remove Item</a>
+        </div>
+    </script>
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://github.com/jquery/jquery-tmpl/raw/master/jquery.tmpl.js"></script>
+    <script type="text/javascript" src="../jquery.ui.bagger.js"></script>
+    
+    <script type="text/javascript">
+        
+        Array.prototype.remove = function(from, to) {
+            var rest = this.slice((to || from) + 1 || this.length);
+            this.length = from < 0 ? this.length + from : from;
+            return this.push.apply(this, rest);
+        };
+        
+        // simulate the API
+        var myAPI = function () {
+            
+            var items = [
+                    {
+                        id: 'item_a',
+                        quantity: 1
+                    },
+                    {
+                        id: 'item_b',
+                        quantity: 3
+                    },
+                    {
+                        id: 'item_c',
+                        quantity: 2
+                    }
+                ],
+                total = 6;
+            
+            return {
+                
+                createItem: function (item, quantity, callback) {
+                    
+                    setTimeout(function(){
+                        
+                        items.push({
+                            id: item.id,
+                            quantity: quantity
+                        });
+                        
+                        myAPI.calculateTotal();
+                        
+                        if ($.isFunction(callback))
+                        {
+                            callback();
+                        }
+                        
+                    }, 300);
+                    
+                },
+                
+                updateItem: function (item, quantity, callback) {
+                    
+                    setTimeout(function(){
+                        
+                        $.each(items, function(){
+                            
+                            if (this.id === item.id)
+                            {
+                                this.quantity = quantity;
+                            }
+                            
+                        });
+                        
+                        myAPI.calculateTotal();
+                        
+                        if ($.isFunction(callback))
+                        {
+                            callback();
+                        }
+                        
+                    }, 300);
+                    
+                },
+                
+                removeItem: function (item, callback) {
+                    
+                    setTimeout(function(){
+                        
+                        var remove;
+                        
+                        $.each(items, function(i){
+                            
+                            if (this.id === item.id)
+                            {
+                                remove = i;
+                            }
+                            
+                        });
+                        
+                        items.remove(remove);
+                        
+                        myAPI.calculateTotal();
+                        
+                        if ($.isFunction(callback))
+                        {
+                            callback();
+                        }
+                        
+                    }, 300);
+                    
+                },
+                
+                calculateTotal: function () {
+                    
+                    total = 0;
+                    
+                    $.each(items, function(){
+                        
+                        total += this.quantity;
+                        
+                    })
+                    
+                    $('.total')
+                        .html(total)
+                        ;
+                    
+                }
+                
+            };
+            
+        }();
+        
+        $(function(){
+            
+            $('.mybagger')
+                .bagger({
+                    start: function (e, bagger) {
+                        
+                        $('table')
+                            .css({
+                                visibility: 'visible'
+                            })
+                            ;
+                        
+                    },
+                    itemCreated: function (e, o) {
+                        
+                        myAPI.createItem(o.item, o.quantity, o.callback);
+                        
+                    },
+                    itemUpdated: function (e, o) {
+                        
+                        myAPI.updateItem(o.item, o.quantity, o.callback);
+                        
+                    },
+                    itemRemoved: function (e, o) {
+                        
+                        myAPI.removeItem(o.item, o.callback);
+                        
+                    }
+                })
+                ;
+            
+        });
+        
+    </script>
+    
+</body>
+</html>
