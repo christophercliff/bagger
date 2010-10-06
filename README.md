@@ -20,6 +20,12 @@ Bagger is a jQuery plugin that replaces a typical ecommerce UI:
     </form>
 
 
+Examples
+--------------
+
+- [Shopping Cart](http://christophercliff.github.com/bagger/demos/contextual_cart.html "Shopping Cart")
+
+
 Requirements
 -------------
 
